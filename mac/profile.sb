@@ -1,0 +1,16 @@
+(version 1)
+
+(import "/Users/dev/.dotfiles/scripts/sandboxes/base.sb")
+
+(if (string=? "online" (param "network"))
+  (import "/Users/dev/.dotfiles/scripts/sandboxes/network-online.sb"))
+
+(if (string=? "gui" (param "ui"))
+  (import "/Users/dev/.dotfiles/scripts/sandboxes/ui-gui.sb"))
+
+
+(if (string=? "most" (param "file"))
+  (import "/Users/dev/.dotfiles/scripts/sandboxes/file-most.sb"))
+
+(if (string=? "full" (param "file"))
+  (import "/Users/dev/.dotfiles/scripts/sandboxes/file-full.sb"))

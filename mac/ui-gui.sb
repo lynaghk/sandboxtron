@@ -1,0 +1,29 @@
+(allow file-read*
+       (subpath "/Applications"))
+
+;;;;;;;;;;;;;;;;;;;;
+;;emacs
+(allow file*
+       (home-subpath "/Library/Preferences/org.gnu.Emacs.plist")
+       (home-subpath "/.emacs.d")
+       (subpath "/Library/Preferences/com.apple.ViewBridge.plist"))
+
+(allow file-read*
+       (home-subpath "/Library/Fonts"))
+
+(allow mach-lookup
+       (global-name-regex "^com.apple.*"))
+
+(allow iokit-open
+       (global-name "AppleAPFSUserClient"))
+
+
+
+;;;;;;;;;;;;;;;;;;;
+;;`open` uses these
+;;but `open` seems to launch things outside of the sandbox
+;; (allow mach-lookup
+;;        (global-name "com.apple.windowserver.active")
+;;        (global-name "com.apple.coreservices.quarantine-resolver")
+;;        (global-name "com.apple.nsurlstorage-cache"))
+;;(allow lsopen)

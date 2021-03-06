@@ -1,0 +1,4 @@
+(allow file*
+       (home-subpath "/work")
+       ;;todo
+       )

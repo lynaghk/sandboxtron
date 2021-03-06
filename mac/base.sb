@@ -1,0 +1,45 @@
+(version 1)
+
+(deny default)
+
+(import "/System/Library/Sandbox/Profiles/bsd.sb")
+
+(define home-path "/Users/dev")
+
+(define (home-subpath home-relative-subpath)
+  (subpath (string-append home-path home-relative-subpath)))
+
+(allow process-exec)
+(allow process-fork)
+
+(allow file*
+       (home-subpath "/.m2")
+       (home-subpath "/.rustup")
+       (home-subpath "/.cargo")
+       (home-subpath "/.rbenv")
+
+       (regex "^/Users/dev/.histfile.*")
+       (regex "^/dev/tty.*")
+       (subpath "/private/var/run/utmpx")
+
+       ;;everyone has access to the working directory in which its spawned (passed in via param)
+       (subpath (param "working-directory")))
+
+(allow file-read*
+       ;;zsh needs these for autocomplete
+       (subpath "/bin")
+       (subpath "/sbin")
+       (subpath "/usr/bin")
+       (subpath "/usr/sbin")
+
+       (subpath "/usr/local")
+       (subpath "/opt/local") ;;macports stuff
+
+       
+
+       (home-subpath "/.dotfiles/link")
+       (home-subpath "/.dotfiles/shell_sources"))
+
+(allow network*
+       (local ip "localhost:*")
+       (remote ip "localhost:*"))
