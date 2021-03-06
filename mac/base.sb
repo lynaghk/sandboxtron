@@ -4,7 +4,7 @@
 
 (import "/System/Library/Sandbox/Profiles/bsd.sb")
 
-(define home-path "/Users/dev")
+(define home-path (param "home"))
 
 (define (home-subpath home-relative-subpath)
   (subpath (string-append home-path home-relative-subpath)))
@@ -18,7 +18,7 @@
        (home-subpath "/.cargo")
        (home-subpath "/.rbenv")
 
-       (regex "^/Users/dev/.histfile.*")
+       (regex (string-append "^" (param "home") "/.histfile.*"))
        (regex "^/dev/tty.*")
        (subpath "/private/var/run/utmpx")
 
@@ -35,8 +35,7 @@
        (subpath "/usr/local")
        (subpath "/opt/local") ;;macports stuff
 
-       
-
+       ;;TODO: how to genericize this for different people?
        (home-subpath "/.dotfiles/link")
        (home-subpath "/.dotfiles/shell_sources"))
 

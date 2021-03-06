@@ -32,7 +32,14 @@ while [[ $# -gt 0 ]]; do
     shift
 done
 
-exec sandbox-exec -f ~/.dotfiles/scripts/sandboxes/profile.sb \
+
+DIR="$( cd "$( dirname $0 )" && pwd )"
+SANDBOXTRON="$( cd $DIR/.. && pwd )"
+
+# TODO, make this work w/ symlinks
+exec sandbox-exec -f  "$DIR/../mac/profile.sb"                \
+     -D home="$HOME"                                          \
+     -D sandboxtron="$SANDBOXTRON"                            \
      -D network="$SANDBOX_MODE_NETWORK"                       \
      -D file="$SANDBOX_MODE_FILE"                             \
      -D ui="$SANDBOX_MODE_UI"                                 \
