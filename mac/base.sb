@@ -22,6 +22,9 @@
        (regex "^/dev/tty.*")
        (subpath "/private/var/run/utmpx")
 
+       ;;tempfiles
+       (subpath "/private/var/folders/")
+
        ;;everyone has access to the working directory in which its spawned (passed in via param)
        (subpath (param "working-directory")))
 
@@ -31,9 +34,10 @@
        (subpath "/sbin")
        (subpath "/usr/bin")
        (subpath "/usr/sbin")
-
        (subpath "/usr/local")
-       (subpath "/opt/local") ;;macports stuff
+
+       ;;macports stuff
+       (subpath "/opt/local")
 
        ;;TODO: how to genericize this for different people?
        (home-subpath "/.dotfiles/link")
@@ -41,4 +45,12 @@
 
 (allow network*
        (local ip "localhost:*")
-       (remote ip "localhost:*"))
+       (remote ip "localhost:*")
+       (remote unix-socket (path-literal "/private/var/run/mDNSResponder")))
+
+(allow mach-lookup
+       ;;needed by command line file watchers like `guard`
+       (global-name "com.apple.FSEvents"))
+
+(allow signal
+       (target children))
