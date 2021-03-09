@@ -18,15 +18,25 @@
        (home-subpath "/.cargo")
        (home-subpath "/.rbenv")
 
+       ;;Yarn
+       (home-subpath "/.yarnrc")
+       (home-subpath "/.yarn")
+       (home-subpath "/.cache/yarn")
+       (home-subpath "/.config/yarn")
+
+       (home-subpath "/.electron-gyp")
+
        (regex (string-append "^" (param "home") "/.histfile.*"))
        (regex "^/dev/tty.*")
        (subpath "/private/var/run/utmpx")
+       (subpath "/private/etc/ssl/openssl.cnf")
 
        ;;tempfiles
        (subpath "/private/var/folders/")
 
        ;;everyone has access to the working directory in which its spawned (passed in via param)
        (subpath (param "working-directory")))
+
 
 (allow file-read*
        ;;zsh needs these for autocomplete
@@ -39,9 +49,14 @@
        ;;macports stuff
        (subpath "/opt/local")
 
+       ;;Cargo
+       (subpath "/Library/Developer/CommandLineTools/")
+       (literal "/Library/Preferences/com.apple.security.plist")
+
        ;;TODO: how to genericize this for different people?
        (home-subpath "/.dotfiles/link")
        (home-subpath "/.dotfiles/shell_sources"))
+
 
 (allow network*
        (local ip "localhost:*")
