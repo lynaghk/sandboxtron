@@ -34,9 +34,10 @@
        ;;tempfiles
        (subpath "/private/var/folders/")
 
+       (subpath "/Applications/Xcode.app/")
+
        ;;everyone has access to the working directory in which its spawned (passed in via param)
        (subpath (param "working-directory")))
-
 
 (allow file-read*
        ;;zsh needs these for autocomplete
@@ -49,6 +50,13 @@
        ;;macports stuff
        (subpath "/opt/local")
 
+       ;;used by xcode python http server -- /private/etc/apache2
+       (subpath "/private/etc")
+
+       (subpath "/Library/Java/JavaVirtualMachines")
+       (subpath "/Library/Apple/usr/bin")
+
+
        ;;Cargo
        (subpath "/Library/Developer/CommandLineTools/")
        (literal "/Library/Preferences/com.apple.security.plist")
@@ -57,6 +65,10 @@
        (home-subpath "/.dotfiles/link")
        (home-subpath "/.dotfiles/shell_sources"))
 
+(allow user-preference-read)
+
+;;required to run Java
+(allow sysctl-write)
 
 (allow network*
        (local ip "localhost:*")
