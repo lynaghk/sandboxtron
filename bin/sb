@@ -43,5 +43,5 @@ exec sandbox-exec -f  "$DIR/../mac/profile.sb"                \
      -D network="$SANDBOX_MODE_NETWORK"                       \
      -D file="$SANDBOX_MODE_FILE"                             \
      -D ui="$SANDBOX_MODE_UI"                                 \
-     -D working-directory=`pwd`                               \
+     -D working-directory="$(pwd)"                            \
      "${@:-$SHELL}"
