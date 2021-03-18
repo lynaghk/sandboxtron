@@ -23,8 +23,8 @@
        (home-subpath "/.yarn")
        (home-subpath "/.cache/yarn")
        (home-subpath "/.config/yarn")
-
        (home-subpath "/.electron-gyp")
+       (home-subpath "/Library/Caches/node-gyp")
 
        (regex (string-append "^" (param "home") "/.histfile.*"))
        (regex "^/dev/tty.*")
@@ -56,7 +56,7 @@
        (subpath "/Library/Java/JavaVirtualMachines")
        (subpath "/Library/Apple/usr/bin")
 
-
+       (home-subpath "/.clojure")
        ;;Cargo
        (subpath "/Library/Developer/CommandLineTools/")
        (literal "/Library/Preferences/com.apple.security.plist")
