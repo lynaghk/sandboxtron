@@ -81,3 +81,7 @@
 
 (allow signal
        (target children))
+
+;;needed by `swift`
+(allow mach-priv-task-port)
+(allow system-debug)

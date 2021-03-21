@@ -24,6 +24,7 @@ sb gui online #ditto, order doesn't matter
 sb most #offline, but access to most folders on computer (except the secret ones)
 ```
 
+If an app doesn't work, search for "sandbox" in `Console.app` to see what permissions the app was denied.
 
 When running in a sandbox, the following env vars will be defined:
 
@@ -56,3 +57,9 @@ fi
 
 PROMPT+=" |%f "
 ```
+
+## Todo
+
++ `deny forbidden-sandbox-reinit` is thrown by:
+  + Electron
+  + `swift build` (though `swift` starts a REPL just fine)
