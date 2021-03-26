@@ -1,0 +1,12 @@
+(version 1)
+
+(define (maybe-import-profile profile-name)
+  (when (and (param profile-name)
+             (not (string=? (param profile-name) "")))
+    (import (string-append (param "sandboxtron") "/mac/" (param profile-name) ".sb"))))
+
+(maybe-import-profile "profile1")
+(maybe-import-profile "profile2")
+(maybe-import-profile "profile3")
+(maybe-import-profile "profile4")
+(maybe-import-profile "profile5")

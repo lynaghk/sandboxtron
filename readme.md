@@ -1,6 +1,8 @@
 # Sandboxtron
 
-Use `sandbox-exec` on Mac to easily run terminals/programs within sandboxes for a slightly safer day-to-day.
+A wrapper around Mac's `sandbox-exec` that lets you easily run terminals/programs within sandboxes for a slightly safer day-to-day computing experience.
+
+Useful if you don't want every npm/cargo/pip transitive dependency to have full access to your filesystem and network.
 
 
 ## Install
@@ -9,22 +11,16 @@ Add `bin/` to your path.
 
 ## Usage
 
-Run `sb` to execute a command (or open a shell, if no command provided) within a sandbox
++ `sb` opens a shell in an offline sandbox that can only read/write the current directory and its children.
+See [base.sb](/mac/base.sb) for the default sandbox profile.
 
-```sh
++ `sb online` opens a shell in an online sandbox.
 
-sb # opens a shell in the default, most restricted sandbox (offline, limited to current working directory and subfolders)
-sb online #as above, but full online access
++ `sb online -- ping www.google.com` runs `ping www.google.com` in an online sandbox and returns.
 
-sb -- ls ~ # run `ls ~` in the sandbox; this will fail unless you are invoking from ~
++ In general: `sb foo bar baz -- command` sources profiles `foo.sb`, `bar.sb`, `baz.sb` from the [profile directory](/mac/) and runs `command` within that sandbox.
 
-sb online gui #online, limited to subdir but have extra permissions
-sb gui online #ditto, order doesn't matter
-
-sb most #offline, but access to most folders on computer (except the secret ones)
-```
-
-If an app doesn't work, search for "sandbox" in `Console.app` to see what permissions the app was denied.
+If an app doesn't work a sanbox, search for "sandbox" in `Console.app` to see what permissions the app was denied and try granting these permissions via a custom profile.
 
 When running in a sandbox, the following env vars will be defined:
 
@@ -32,27 +28,18 @@ When running in a sandbox, the following env vars will be defined:
   + online
   + offline
   
-+ `SANDBOX_MODE_FILE`
-  + most: no file restrictions within a set of directories
-  + full: no file restrictions
-
-I use these to add emoji to my ZSH prompt to remind me of my shell's capabilities:
+I find it helpful to add emoji to my ZSH prompt to remind me of my shell's capabilities:
 
 ```sh
 PROMPT="%(?.%F{green}.%F{red})"
 
-# Assume starting outside of sandbox
-export SANDBOX_MODE_FILE=${SANDBOX_MODE_FILE:-full}
-export SANDBOX_MODE_NETWORK=${SANDBOX_MODE_NETWORK:-online}
-
-if [[ "online" = "$SANDBOX_MODE_NETWORK" ]]; then
+PROMPT="%(?.%F{green}.%F{red})"
+if [[ "online" = "${SANDBOX_MODE_NETWORK:-online}" ]]; then
     PROMPT+="📡"
 fi
 
-if [[ "most" = "$SANDBOX_MODE_FILE" ]]; then
+if [[ -r "$HOME" ]]; then
     PROMPT+="🏠"
-elif [[ "full" = "$SANDBOX_MODE_FILE" ]]; then
-    PROMPT+="⚡"
 fi
 
 PROMPT+=" |%f "
@@ -63,3 +50,9 @@ PROMPT+=" |%f "
 + `deny forbidden-sandbox-reinit` is thrown by:
   + Electron
   + `swift build` (though `swift` starts a REPL just fine)
+
+
+## Further reading
+
++ https://www.karltarvas.com/2020/10/25/macos-app-sandboxing-via-sandbox-exec.html
++ Take a look around Apple's built-in profiles in /System/Library/Sandbox/Profiles

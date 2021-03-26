@@ -1,47 +1,38 @@
 #!/usr/bin/env zsh
 
-# default to most restrictive modes
-export SANDBOX_MODE_NETWORK=offline
-export SANDBOX_MODE_FILE=subdir
-export SANDBOX_MODE_UI=cli
+DIR="$( cd "$( dirname $0 )" && pwd )"
+SANDBOXTRON="$( cd $DIR/.. && pwd )"
 
+export SANDBOX_MODE_NETWORK="offline"
+
+PROFILES=("base")
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        offline | online)
-            SANDBOX_MODE_NETWORK=$1
-            ;;
-
-        subdir | most | full)
-            SANDBOX_MODE_FILE=$1
-            ;;
-
-        cli | gui)
-            SANDBOX_MODE_UI=$1
-            ;;
-
         "--")
             shift
             break
             ;;
 
+        "online")
+            SANDBOX_MODE_NETWORK="online"
+            PROFILES+=($1)
+            ;;
+
         *)
-            echo "Unknown sandbox option $1" 1>&2
-            exit 1
+            PROFILES+=($1)
             ;;
     esac
     shift
 done
 
-
-DIR="$( cd "$( dirname $0 )" && pwd )"
-SANDBOXTRON="$( cd $DIR/.. && pwd )"
-
 # TODO, make this work w/ symlinks
-exec sandbox-exec -f  "$DIR/../mac/profile.sb"                \
+exec sandbox-exec -f "$DIR/../mac/main.sb"                    \
      -D home="$HOME"                                          \
      -D sandboxtron="$SANDBOXTRON"                            \
-     -D network="$SANDBOX_MODE_NETWORK"                       \
-     -D file="$SANDBOX_MODE_FILE"                             \
-     -D ui="$SANDBOX_MODE_UI"                                 \
      -D working-directory="$(pwd)"                            \
+     -D profile1="$PROFILES[1]"                               \
+     -D profile2="$PROFILES[2]"                               \
+     -D profile3="$PROFILES[3]"                               \
+     -D profile4="$PROFILES[4]"                               \
+     -D profile5="$PROFILES[5]"                               \
      "${@:-$SHELL}"
