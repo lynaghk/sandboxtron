@@ -72,8 +72,7 @@
 
 (allow network*
        (local ip "localhost:*")
-       (remote ip "localhost:*")
-       (remote unix-socket (path-literal "/private/var/run/mDNSResponder")))
+       (remote ip "localhost:*"))
 
 (allow mach-lookup
        ;;needed by command line file watchers like `guard`
