@@ -4,6 +4,8 @@ A wrapper around Mac's `sandbox-exec` that lets you easily run terminals/program
 
 Useful if you don't want every npm/cargo/pip transitive dependency to have full access to your filesystem and network.
 
+See [this writeup](https://kevinlynagh.com/newsletter/2020_04_how_fast_can_plants_grow/) for a bit more background.
+
 
 ## Install
 
