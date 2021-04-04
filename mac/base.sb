@@ -25,6 +25,7 @@
        (home-subpath "/.config/yarn")
        (home-subpath "/.electron-gyp")
        (home-subpath "/Library/Caches/node-gyp")
+       (home-subpath "/Library/Caches/electron")
 
        (regex (string-append "^" (param "home") "/.histfile.*"))
        (regex "^/dev/tty.*")
