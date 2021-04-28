@@ -57,6 +57,9 @@
        (subpath "/Library/Java/JavaVirtualMachines")
        (subpath "/Library/Apple/usr/bin")
 
+       ;;xcoderun needs help remembering you agreed to its license terms
+       (subpath "/Library/Preferences/com.apple.dt.Xcode.plist")
+
        (home-subpath "/.clojure")
        ;;Cargo
        (subpath "/Library/Developer/CommandLineTools/")
