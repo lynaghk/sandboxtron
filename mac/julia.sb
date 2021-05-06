@@ -1,0 +1,26 @@
+(allow file*
+       (home-subpath "/.julia")
+       (subpath "/private/tmp/"))
+
+
+(allow file-read*
+       (subpath "/Applications/Julia-1.6.app")
+       ;;need something in here for LibGit2 SSL to work / packages to download, not sure what it is =(
+       (subpath "/private/var/"))
+
+
+(allow mach-lookup
+       (global-name-regex "^com.apple.*"))
+
+
+(allow ipc-posix-shm
+       (ipc-posix-name "com.apple.AppleDatabaseChanged"))
+
+
+;;;;;;;;;;;;;;;;;
+;;rel-specific
+(allow file*
+       (home-subpath "/Library/Jupyter"))
+
+;;needed by conda
+(allow ipc-posix-sem)

@@ -36,6 +36,8 @@
        (subpath "/private/var/folders/")
 
        (subpath "/Applications/Xcode.app/")
+       ;;xcodebuild requires this
+       (home-subpath "/Library/Developer/Xcode/DerivedData")
 
        ;;everyone has access to the working directory in which its spawned (passed in via param)
        (subpath (param "working-directory")))
