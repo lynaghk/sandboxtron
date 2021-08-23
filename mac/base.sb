@@ -77,8 +77,7 @@
 (allow sysctl-write)
 
 (allow network*
-       (local ip "localhost:*")
-       (remote ip "localhost:*"))
+       (to ip "localhost:*"))
 
 (allow mach-lookup
        ;;needed by command line file watchers like `guard`
