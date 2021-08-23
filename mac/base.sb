@@ -78,6 +78,9 @@
 
 (allow network*
        (to ip "localhost:*"))
+(allow network-inbound
+       (from ip "localhost:*"))
+
 
 (allow mach-lookup
        ;;needed by command line file watchers like `guard`
