@@ -1,3 +1,10 @@
 (version 1)
 
 (allow network*)
+
+(allow file-read*
+       ;;need something in here for SSL to work / packages to download, not sure what it is =(
+       (subpath "/private/var/"))
+
+(allow mach-lookup
+       (global-name-regex "^com.apple.*"))
