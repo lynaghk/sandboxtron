@@ -58,6 +58,7 @@
 
        (subpath "/Library/Java/JavaVirtualMachines")
        (subpath "/Library/Apple/usr/bin")
+       (subpath "/Library/Apple/usr/libexec/oah") ;;rosetta
 
        ;;xcoderun needs help remembering you agreed to its license terms
        (subpath "/Library/Preferences/com.apple.dt.Xcode.plist")
