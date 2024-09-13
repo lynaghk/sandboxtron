@@ -27,6 +27,14 @@
        (home-subpath "/Library/Caches/node-gyp")
        (home-subpath "/Library/Caches/electron")
 
+       ;; Python
+       (home-subpath "/.pyenv/shims")
+       (home-subpath "/Library/Caches/pip")
+       (regex #"/Users/[a-zA-Z]+/Library/Python/[0-9,\.]+/lib/python[0-9,\.]*/site-packages")
+       (regex #"/Users/[a-zA-Z]+/Library/Python/[0-9,\.]+/bin")
+       (regex #"/Users/[a-zA-Z]+/.pyenv/versions/[0-9,\.]+/lib/python[0-9,\.]*/site-packages")
+       (regex #"/Users/[a-zA-Z]+/.pyenv/versions/[0-9,\.]+/bin")
+
        (regex (string-append "^" (param "home") "/.histfile.*"))
        (regex "^/dev/tty.*")
        (subpath "/private/var/run/utmpx")
@@ -59,6 +67,9 @@
        (subpath "/Library/Java/JavaVirtualMachines")
        (subpath "/Library/Apple/usr/bin")
        (subpath "/Library/Apple/usr/libexec/oah") ;;rosetta
+
+       ;; Python
+       (home-subpath "/.pyenv")
 
        ;;xcoderun needs help remembering you agreed to its license terms
        (subpath "/Library/Preferences/com.apple.dt.Xcode.plist")
